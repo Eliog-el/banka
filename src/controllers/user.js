@@ -22,3 +22,15 @@ export const login = async (req, res) => {
 
 let users = [];
 
+export const signUp = async (req, res) => {
+  const { email, password } = req.body;
+  const user = users.filter((user) => user.email === email);
+
+  if (!user) {
+    errorResponse(res, 404, "User not found!");
+  }
+
+  if ((user.password = password)) {
+    return successResponse(res, 200, "SignIn is successful!");
+  }
+};
