@@ -8,7 +8,7 @@
  * @memberof UserController
  */
 export const successResponse = (res, statusCode, objectname, object) => {
-  return res.statusCode(statusCode).json({
+  return res.status(statusCode).json({
     data: {
       status: statusCode,
       [objectname]: object,
@@ -26,7 +26,7 @@ export const successResponse = (res, statusCode, objectname, object) => {
  * @memberof UserController
  */
 export const errorResponse = (res, statusCode, message) => {
-  return res.statusCode(statusCode).json({
+  return res.status(statusCode).json({
     data: {
       status: statusCode,
       error: message,

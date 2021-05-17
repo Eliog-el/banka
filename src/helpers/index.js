@@ -1,6 +1,4 @@
-import { successResponse, errorResponse } from './utilities';
+import { successResponse, errorResponse } from "./utilities";
 
-export default {
-  successResponse,
-  errorResponse,
-};
+export default successResponse
+export default errorResponse
