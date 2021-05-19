@@ -1,6 +1,7 @@
 // import { successResponse, errorResponse } from "../helpers";
 import { successResponse, errorResponse } from "../helpers/utilities";
 import { v4 as uuidv4 } from "uuid";
+import bcrypt from 'bcrypt';
 
 export const signUp = async (req, res) => {
   try {
