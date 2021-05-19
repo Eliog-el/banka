@@ -2,12 +2,15 @@
 import { successResponse, errorResponse } from "../helpers/utilities";
 import { v4 as uuidv4 } from "uuid";
 
-export const login = async (req, res) => {
+export const signUp = async (req, res) => {
   try {
+    const salt = await bcrypt.genSalt();
+
+    const hashedPassword = await bcrypt.hash(req.body.password, salt);
+
     const user = req.body;
 
-    const userObj = { ...user, id: uuidv4() };
-
+    const userObj = { ...user, id: uuidv4(), password: hashedPassword };
     users.push(userObj);
 
     return successResponse(res, 200, "data", {
@@ -22,7 +25,7 @@ export const login = async (req, res) => {
 
 let users = [];
 
-export const signUp = async (req, res) => {
+export const signIn = async (req, res) => {
   const { email, password } = req.body;
   const user = users.filter((user) => user.email === email);
 
