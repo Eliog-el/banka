@@ -1,18 +1,28 @@
 {
   "name": "banka",
   "version": "1.0.0",
-  "description": "",
   "main": "app.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon src/app" 
+    "dev": "nodemon src/app"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "nodemon": "^2.0.7"
   },
   "devDependencies": {
     "morgan": "^1.10.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Eliog-el/banka.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/Eliog-el/banka/issues"
+  },
+  "homepage": "https://github.com/Eliog-el/banka#readme",
+  "description": ""
 }

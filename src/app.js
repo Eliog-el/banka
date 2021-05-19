@@ -1,14 +1,11 @@
-const express = require("express");
-const morgan = require('morgan')
-
+import express from 'express';
+import bodyParser from "body-parser";
+;
 const app = express();
+const PORT = 3000;
 
-app.use(morgan('tiny'))
+app.use(bodyParser.json());
 
-app.get("", (req, res) => {
-  res.json({Message:'Banka App'});
-});
+app.get('/', (req, res) => res.send('Hello from Homepage!'))
 
-app.listen(3000, () => {
-  console.log("Server is up on port 3000");
-});
+app.listen(PORT, () => console.log(`Server Running on port: http://localhost${PORT}`));
