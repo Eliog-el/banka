@@ -27,14 +27,21 @@ export const signUp = async (req, res) => {
 let users = [];
 
 export const signIn = async (req, res) => {
-  const { email, password } = req.body;
-  const user = users.filter((user) => user.email === email);
+
+  const user = users.find((user) => user.email === req.body.email);
 
   if (!user) {
-    errorResponse(res, 404, "User not found!");
+    return errorResponse(res, 404, "User not found!");
+  }
+  
+  try {
+    if (await bcrypt.compare(req.body.password, user.password)) {
+      res.send('success')
+    } else {
+      res.send('Not alloweed')
+    }
+  } catch {
+    res.status(500).send()
   }
 
-  if ((user.password = password)) {
-    return successResponse(res, 200, "SignIn is successful!");
-  }
 };
