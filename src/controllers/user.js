@@ -32,16 +32,20 @@ export const signIn = async (req, res) => {
 
   if (!user) {
     return errorResponse(res, 404, "User not found!");
+  } else {  
+     try {
+      if (await bcrypt.compare(req.body.password, user.password)) {
+        res.send(successResponse(res, 200, "data", {
+          messgae: 'Signing In successful',
+        }))
+      } else {
+        res.send('User not found')
+      }
+    } catch {
+      res.status(500).send()
+    }
   }
   
-  try {
-    if (await bcrypt.compare(req.body.password, user.password)) {
-      res.send('success')
-    } else {
-      res.send('Not alloweed')
-    }
-  } catch {
-    res.status(500).send()
-  }
+  
 
 };
