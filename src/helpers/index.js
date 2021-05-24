@@ -1,4 +1,8 @@
-import { successResponse, errorResponse } from "./utilities";
+import { successResponse, errorResponse } from './utilities';
+import { signupSchema } from './validator/user';
 
-export default successResponse
-export default errorResponse
+export default {
+  successResponse,
+  errorResponse,
+  signupSchema,
+};
