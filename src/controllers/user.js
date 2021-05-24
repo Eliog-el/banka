@@ -5,6 +5,7 @@ import { successResponse, errorResponse } from "../helpers/utilities";
 import { v4 as uuidv4 } from "uuid";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import { authSchema } from "../helpers/validation_schema"
 
 export const signUp = async (req, res) => {
   try {
@@ -12,7 +13,8 @@ export const signUp = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
-    const user = req.body;
+    const user = await authSchema.validateAsync(req.body);
+    console.log(user)
 
     const userObj = { ...user, id: uuidv4(), password: hashedPassword };
     users.push(userObj);
