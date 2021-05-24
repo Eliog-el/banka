@@ -12,12 +12,12 @@ const { errorResponse } = helpers;
  * @memberof UserController
  */
 export const validate = (schema) => (req, res, next) => {
-  try {
-    const validated = schema.validate(req.body);
-    req.validated = validated;
+  const { error, value } = schema.validate(req.body);
 
-    next();
-  } catch (err) {
+  if (error) {
     return errorResponse(res, 400, err);
   }
+
+  req.validated = value;
+  next();
 };
