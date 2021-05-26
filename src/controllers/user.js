@@ -9,13 +9,13 @@ import jwt from 'jsonwebtoken';
 
 export const signUp = async (req, res) => {
   try {
-    const { password, firstName, email } = req.validated;
+    const { password, firstName, lastName, email } = req.validated;
 
     const salt = await bcrypt.genSalt();
 
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    const userObj = { id: uuidv4(), password: hashedPassword, email };
+    const userObj = { firstName, lastName, email, id: uuidv4(), password: hashedPassword };
 
     users.push(userObj);
 
