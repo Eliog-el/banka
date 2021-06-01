@@ -19,7 +19,6 @@ export const createAccount = async (req, res) => {
       });
     } catch (err) {
       errorResponse(res, 500, 'Unable to create account number!');
-      console.log(err);
     }
   };
   
