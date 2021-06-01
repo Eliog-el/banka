@@ -7,17 +7,18 @@ let accounts = [];
 export const createAccount = async (req, res) => {
     try {
       const account = req.body;
+      const accountNumber = Math.floor(1000000000 + Math.random() * 9000000000);
   
-      const accountObj = { ...account, id: uuidv4() };
+      const accountObj = { ...account, id: uuidv4(), accountNumber};
   
       accounts.push(accountObj);
   
       return successResponse(res, 200, "data", {
         ...accountObj,
-        message: `Account added to the database!`,
+        message: `Account number created successfully!`,
       });
     } catch (err) {
-      errorResponse(res, 500, 'invalid account number');
+      errorResponse(res, 500, 'Unable to create account number!');
       console.log(err);
     }
   };
