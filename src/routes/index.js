@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
   return res.json({ message: 'Welcome back banka' });
 });
 
-router.use('/user', users);
+router.use('/auth', users);
 
 router.use('/account', account);
 
