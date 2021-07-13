@@ -1,5 +1,7 @@
 const users = [];
 
+const accounts = [];
 
 
-export default users;
+
+export default { users, accounts };
