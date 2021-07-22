@@ -9,7 +9,7 @@ import jwt from 'jsonwebtoken';
 
 export const signUp = async (req, res) => {
   try {
-    const { firstName, lastName, password, email  } = req.validated;
+    const { firstName, lastName, password, email } = req.validated;
 
     const salt = await bcrypt.genSalt();
 
@@ -23,8 +23,8 @@ export const signUp = async (req, res) => {
       ...userObj,
       message: `User with the name ${firstName} added to the database!`,
     });
-  } catch (err) {
-    errorResponse(res, 500, err);
+  } catch (error) {
+    errorResponse(res, 500, error);
   }
 };
 
@@ -49,3 +49,4 @@ export const signIn = async (req, res) => {
 
 
 }
+

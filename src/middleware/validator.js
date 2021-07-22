@@ -15,7 +15,7 @@ export const validate = (schema) => (req, res, next) => {
   const { error, value } = schema.validate(req.body);
 
   if (error) {
-    return errorResponse(res, 400, err);
+    return errorResponse(res, 400, error);
   }
 
   req.validated = value;
