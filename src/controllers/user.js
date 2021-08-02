@@ -112,16 +112,16 @@ export const signIn = async (req, res) => {
 };
 
 
-// export const getDetails = async (req, res) => {
-//   const { id } = req.params;
+export const getDetails = async (req, res) => {
+  const { id } = req.params;
 
-//   const foundUser = users.find((user) => user.id === id);
+  const foundUser = users.find((user) => user.id === id);
 
-//   res.send(foundUser)
-// }
+  res.send(foundUser)
+}
 
-// export const getAllUser = async (req, res) => {
-//   var users_response = data.user;
+export const getAllUser = async (req, res) => {
+  var users_response = users;
 
-//   return successResponse(res, 200, 'users', users_response);
-// }
+  return successResponse(res, 200, 'users', users_response);
+}

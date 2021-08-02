@@ -8,7 +8,7 @@ const { validate } = middlewares;
 
 const router = express.Router();
 
-// router.get('/getAllUsers', getAllUser);
+router.get('/getAllUsers', getAllUser);
 
 router.post('/signUp', validate(signupSchema), signUp);
 
