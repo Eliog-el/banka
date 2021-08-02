@@ -51,7 +51,7 @@ export const transaction = async (req, res) => {
     accounts.splice(0)
     accounts.push(...newAcounts)
 
-    wToFile('accounts', accounts)
+    wToFile('transactions', transactions)
 
     console.log(accounts)
 
