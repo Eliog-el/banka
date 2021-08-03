@@ -72,11 +72,9 @@ export const signIn = async (req, res) => {
     if (!user) {
       return errorResponse(res, 404, "User not found!");
     }
-    if (await bcrypt.compare(req.body.password, user.password)) {
-      successResponse(res, 200, "data");
-    } else {
-      return errorResponse(res, 401, "Invalid username and password");
-    }
+    if (!await bcrypt.compare(req.body.password, user.password)) {
+      errorstatus(res, 401, 'Email or password not correct');
+    } 
 
     const { id, firstName, lastName, type, isadmin } = user;
 
