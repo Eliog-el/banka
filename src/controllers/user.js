@@ -8,12 +8,9 @@ import {
 } from "../helpers/utilities";
 import { v4 as uuidv4 } from "uuid";
 import bcrypt from "bcrypt";
-// import cookieParser from 'cookieParser';
 import { createTokens, validateToken } from "../helpers/token.js";
-import jwt from "jsonwebtoken";
 import users from "../data/userData";
 
-// app.use(cookieParser());
 
 export const signUp = async (req, res) => {
   let type;
@@ -32,7 +29,6 @@ export const signUp = async (req, res) => {
   try {
     const { firstName, lastName, password, email } = req.validated;
     const users = await getTableContents("users");
-
     const user = users.find((user) => user.email === email);
 
     if (user) {
@@ -40,7 +36,6 @@ export const signUp = async (req, res) => {
     }
 
     const salt = await bcrypt.genSalt();
-
     const hashedPassword = await bcrypt.hash(password, salt);
 
     const userObj = {
@@ -50,9 +45,7 @@ export const signUp = async (req, res) => {
       id: uuidv4(),
       password: hashedPassword,
     };
-
     users.push(userObj);
-
     wToFile("users", users);
     // delete userObj.password
 
@@ -98,7 +91,6 @@ export const signIn = async (req, res) => {
     return errorResponse(res, 500, "SERVER ERROR");
   }
 };
-
 
 export const getDetails = async (req, res) => {
   const { id } = req.params;
