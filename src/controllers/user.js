@@ -76,8 +76,6 @@ export const signIn = async (req, res) => {
       errorstatus(res, 401, 'Email or password not correct');
     } 
 
-    const { id, firstName, lastName, type, isadmin } = user;
-
     // const tokenObj = { id };
 
     return successResponse(res, 200, "data", {

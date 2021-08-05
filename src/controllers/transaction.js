@@ -11,7 +11,7 @@ const calulateBalance = (type, balance, amount) => {
 
 export const transaction = async (req, res) => {
   const {
-    loggedinUser, accountNumber, amount, description, type,
+    loggedinUser, accountNumber, amount, description,
   } = req.body;
   try {
     const account = accounts.find((account) => account.accountNumber === accountNumber)
@@ -20,25 +20,27 @@ export const transaction = async (req, res) => {
       return errorResponse(res, 404, 'Account not found');
     }
 
-    const { accountBalance, status } = account
+    const { accountBalance, status } = account[0];
+    const type = req.url.endsWith('debit')? 'debit' : 'credit';
 
     if (loggedinUser.isadmin === 'true' || loggedinUser.type === 'client') {
       return util.errorstatus(res, 403, 'Forbidden, You Are not allowed to perform this action');
     }
 
-    // if (type === 'debit' && status === 'dormant') {
-    //   return cannot do this on dormant account
-    // }
+    if (type === 'debit' && status === 'dormant') {
+      errorstatus(res, 400, 'cannot perform transaction on dormant account')
+    }
 
     if (type === 'debit' && accountBalance < amount) {
       return errorstatus(res, 400, 'insuffcient fund');
     }
 
 
-    const newBalance = calulateBalance(type, balance, amount);
+    const newBalance = calulateBalance(type, accountBalance, amount);
     const transactions = transactions.push({
       type, amount, oldBalance: balance, newBalance, accountNumber, description, id: uuidv4()
     })
+    wToFile("transactions", transactions);
 
     const newAcounts = accounts.map((acc) => {
       if (acc.accountNumber === accountNumber) {
