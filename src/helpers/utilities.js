@@ -1,3 +1,5 @@
+import fs from 'fs'
+
 /**
  * @
  * @description creates sends a postive response
@@ -33,3 +35,26 @@ export const errorResponse = (res, statusCode, message) => {
     },
   });
 };
+
+export const getTableContents = async (table) => {
+  let data = await fs.readFileSync(`${__dirname}/../data/store.txt`)
+
+  const store = JSON.parse(data.toString())
+  data = store[table];
+
+  return data
+}
+
+export const wToFile = async (table, table_data) => {
+  fs.readFile(`${__dirname}/../data/store.txt`, (err, data) => {
+    if(err) {
+      throw Error(err.message)
+    }
+  
+    const store = JSON.parse(data)
+    store[table] = table_data
+
+    fs.writeFileSync(`${__dirname}/../data/store.txt`, JSON.stringify(store), { flag: 'w' })
+
+  })
+}
