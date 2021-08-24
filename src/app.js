@@ -1,11 +1,21 @@
 import express from 'express';
-import bodyParser from "body-parser";
-;
+import { JsonWebTokenError } from 'jsonwebtoken';
+import routes from './routes';
+import cookieParser from 'cookie-Parser'; 
+require('dotenv').config();
+
+
 const app = express();
 const PORT = 3000;
 
-app.use(bodyParser.json());
+app.use(cookieParser());
 
-app.get('/', (req, res) => res.send('Hello from Homepage!'))
+app.use(express.json());
 
-app.listen(PORT, () => console.log(`Server Running on port: http://localhost${PORT}`));
+
+
+app.use('/', routes); 
+
+app.listen(PORT, () =>
+  console.log(`Server Running on port: http://localhost${PORT}`)
+);
